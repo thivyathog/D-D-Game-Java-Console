@@ -1,0 +1,365 @@
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Skill {
+    private static LinkedList<String> skills = new LinkedList<>();
+    private static ArrayList<String> list = new ArrayList<>();
+
+    private double rank;
+
+    private int stat_Affinity;
+
+
+    public void NextSkill(int y, int[] bonus, String c,int skillp) {
+
+        int level = y;
+        int skill_p=skillp;
+        String name;
+
+        int i = 0;
+        int[] bValues = bonus;
+        File x = new File("F:\\skill.txt");
+
+        try {
+            Scanner sc = new Scanner(x);
+            while (sc.hasNextLine()) {
+
+                name = sc.nextLine();
+
+
+                System.out.println("Do you want\t" + name + "as your skill?");
+                Scanner xy = new Scanner(System.in);
+                String agree = xy.next();
+
+                if (agree.equals("yes")) {
+
+
+                    skills.add(name);
+                    if (i == (skill_p - 1)) {
+
+                        break;
+                    }
+                    i += 1;
+                }
+
+
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error");
+        }
+        try {
+            Scanner scan = new Scanner(x);
+            while (scan.hasNextLine()) {
+                String name2 = scan.nextLine();
+                list.add(name2);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error");
+        }
+        for ( int t = 0; t <skill_p; t++) {
+            switch (skills.get(t)) {
+                case "Animal Handling":
+                    if (c.equals("barbarian") || c.equals("bard") || c.equals("druid") || c.equals("fighter") ||
+                            c.equals("ranger")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    }
+                    stat_Affinity=stat_Affinity+bValues[4];
+                    break;
+                case "Athletics":
+                    if (c.equals("barbarian") || c.equals("bard") || c.equals("fighter") || c.equals("monk") || c.equals("paladin") || c.equals("ranger") ||
+                            c.equals("rogue")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    }
+                    stat_Affinity=stat_Affinity+bValues[0];
+
+                    break;
+                case "Intimidation":
+                    if (c.equals("barbarian") || c.equals("fighter") || c.equals("monk") || c.equals("paladin") || c.equals("rogue") || c.equals("sorcerer") ||
+                            c.equals("warlock") || c.equals("bard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[5];
+                case "Nature":
+                    if (c.equals("bard") || c.equals("barbarian") || c.equals("druid") || c.equals("ranger") || c.equals("warlock")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[3];
+                    break;
+                case "Perception":
+                    if (c.equals("bard") || c.equals("barbarian") || c.equals("druid") || c.equals("fighter") || c.equals("ranger") || c.equals("rogue")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[4];
+                    break;
+                case "Survival":
+                    if (c.equals("bard") || c.equals("druid") || c.equals("barbarian") || c.equals("fighter") || c.equals("ranger")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[4];
+                    break;
+                case "History":
+
+                    if (c.equals("bard") || c.equals("cleric") || c.equals("fighter") || c.equals("monk") || c.equals("warlock") || c.equals("wizard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    }
+                    stat_Affinity=stat_Affinity+bValues[3];
+                    break;
+                case "Insight":
+                    if (c.equals("cleric") || c.equals("druid") || c.equals("fighter") || c.equals("monk") || c.equals("paladin") || c.equals("ranger") ||
+                            c.equals("sorcerer") || c.equals("wizard") || c.equals("bard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[4];
+                    break;
+                case "Medicine":
+                    if (c.equals("cleric") || c.equals("druid") || c.equals("paladin") || c.equals("wizard") || c.equals("bard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[4];
+                    break;
+                case "Persuasion":
+                    if (c.equals("cleric") || c.equals("paladin") || c.equals("rogue") || c.equals("sorcerer") || c.equals("bard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[5];
+                    break;
+                case "Religion":
+                    if (c.equals("cleric") || c.equals("druid") || c.equals("monk") || c.equals("paladin") || c.equals("sorcerer") ||
+                            c.equals("warlock") || c.equals("wizard") || c.equals("bard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[3];
+                    break;
+                case " Acrobatics":
+                    if (c.equals("fighter") || c.equals("monk") || c.equals("rogue") || c.equals("bard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[1];
+                    break;
+                case "Stealth":
+                    if (c.equals("monk") || c.equals("ranger") || c.equals("rogue") || c.equals("bard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[1];
+                    break;
+                case "Investigation":
+                    if (c.equals("ranger") || c.equals("rogue") || c.equals("warlock") || c.equals("wizard") || c.equals("bard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[3];
+                    break;
+                case "Performance":
+
+                    if (c.equals("rogue") || c.equals("bard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[5];
+                    break;
+                case "Sleight of Hand":
+                    if (c.equals("rogue") || c.equals("bard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    } stat_Affinity=stat_Affinity+bValues[1];
+                    break;
+                case "Arcana":
+                    if (c.equals("druid") || c.equals("sorcer") || c.equals("warlock") || c.equals("wizard") || c.equals("bard")) {
+                        stat_Affinity =stat_Affinity+prof_bonus(level);
+                    }
+                    stat_Affinity=stat_Affinity+bValues[3];
+                    break;
+                case "Deception":
+                    if (c.equals("rogue") || c.equals("sorcerer") || c.equals("bard") || c.equals("warlock")) {
+                        stat_Affinity = stat_Affinity + prof_bonus(level);
+                    }
+                    stat_Affinity=stat_Affinity+bValues[5];
+
+                    break;
+            }
+        }
+
+
+
+    }
+
+
+    public void rankClassify(String m, int p) {
+
+        String optional=m;
+
+        switch (optional) {
+            case "barbarian":
+                for (int j = 0; j < p; j++) {
+                    if ((skills.get(j).equals(list.get(0))) || (skills.get(j).equals(list.get(1))) || (skills.get(j).equals(list.get(2))) || (skills.get(j).equals(list.get(3)))
+                            || (skills.get(j).equals(list.get(4))) || (skills.get(j).equals(list.get(5)))) {
+                        rank = rank + 1;
+
+                    } else {
+                        rank = rank + 0.5;
+                    }
+                }
+                break;
+
+
+            case "druid":
+                for (int j = 0; j < p; j++) {
+                    if ((skills.get(j).equals(list.get(16))) || (skills.get(j).equals(list.get(0))) || (skills.get(j).equals(list.get(7))) || (skills.get(j).equals(list.get(8)))
+                            || (skills.get(j).equals(list.get(3))) || (skills.get(j).equals(list.get(4))) || (skills.get(j).equals(list.get(10))) || (skills.get(j).equals(list.get(5)))) {
+                        rank = rank + 1;
+
+                    } else {
+                        rank = rank + 0.5;
+                    }
+                }
+
+                break;
+
+
+            case "warlock":
+                for (int j = 0; j < p; j++) {
+                    if ((skills.get(j).equals(list.get(1))) || (skills.get(j).equals(list.get(0))) || (skills.get(j).equals(list.get(7))) || (skills.get(j).equals(list.get(8))
+                    ) || (skills.get(j).equals(list.get(3))) || (skills.get(j).equals(list.get(4))) || (skills.get(j).equals(list.get(10))) || (skills.get(j).equals(list.get(5)))) {
+                        rank = rank + 1;
+
+                    } else {
+                        rank = rank + 0.5;
+                    }
+                }
+                break;
+
+
+            case "cleric":
+                for (int j = 0; j < p; j++) {
+                    if ((skills.get(j).equals(list.get(6))) || (skills.get(j).equals(list.get(7))) || (skills.get(j).equals(list.get(8))) || (skills.get(j).equals(list.get(9))
+                    ) || (skills.get(j).equals(list.get(10)))) {
+                        rank = rank + 1;
+
+                    } else {
+                        rank = rank + 0.5;
+                    }
+                }
+                break;
+
+            case "sorcerer":
+                for (int j = 0; j < p; j++) {
+                    if ((skills.get(j).equals(list.get(16))) || (skills.get(j).equals(list.get(7))) || (skills.get(j).equals(list.get(4))) || (skills.get(j).equals(list.get(9))) || (skills.get(j).equals(list.get(10))
+                    ) || (skills.get(j).equals(list.get(2)))) {
+                        rank = rank + 1;
+
+                    } else {
+                        rank = rank + 0.5;
+                    }
+                }
+                break;
+            case "bard":
+                for (int j = 0; j < p; j++) {
+                    rank = rank + 1;
+                }
+                break;
+            case "monk":
+                for (int j = 0; j < p; j++) {
+                    if ((skills.get(j).equals(list.get(11))) || (skills.get(j).equals(list.get(1))) || (skills.get(j).equals(list.get(12))) || (skills.get(j).equals(list.get(6))) || (skills.get(j).equals(list.get(7))
+                    ) || (skills.get(j).equals(list.get(10)))) {
+                        rank = rank + 1;
+
+                    } else {
+                        rank = rank + 0.5;
+                    }
+                }
+                break;
+
+            case "ranger":
+                for (int j = 0; j < p; j++) {
+                    if ((skills.get(j).equals(list.get(0))) || (skills.get(j).equals(list.get(1))) || (skills.get(j).equals(list.get(7))) || (skills.get(j).equals(list.get(2))) || (skills.get(j).equals(list.get(3))
+                    ) || (skills.get(j).equals(list.get(5))) || (skills.get(j).equals(list.get(12))) || (skills.get(j).equals(list.get(4)))) {
+                        rank = rank + 1;
+
+                    } else {
+                        rank = rank + 0.5;
+                    }
+                }
+                break;
+
+
+            case "paladin":
+                for (int j = 0; j < p; j++) {
+                    if ((skills.get(j).equals(list.get(8))) || (skills.get(j).equals(list.get(1))) || (skills.get(j).equals(list.get(7))) || (skills.get(j).equals(list.get(2))
+                    ) || (skills.get(j).equals(list.get(9))) || (skills.get(j).equals(list.get(10)))) {
+                        rank = rank + 1;
+
+                    } else {
+                        rank = rank + 0.5;
+                    }
+                }
+                break;
+
+
+            case "rogue":
+                for (int j = 0; j < p; j++) {
+                    if ((skills.get(j).equals(list.get(11))) || (skills.get(j).equals(list.get(1))) || (skills.get(j).equals(list.get(17))) || (skills.get(j).equals(list.get(2))) || (skills.get(j).equals(list.get(4))
+                    ) || (skills.get(j).equals(list.get(12))) || (skills.get(j).equals(list.get(15))) || (skills.get(j).equals(list.get(9))) || (skills.get(j).equals(list.get(7))) || (skills.get(j).equals(list.get(14)))) {
+                        rank = rank + 1;
+
+                    } else {
+                        rank = rank + 0.5;
+                    }
+                }
+                break;
+
+
+            case "fighter":
+                for (int j = 0; j < p; j++) {
+                    if ((skills.get(j).equals(list.get(11))) || (skills.get(j).equals(list.get(1))) || (skills.get(j).equals(list.get(2))) || (skills.get(j).equals(list.get(6))) || (skills.get(j).equals(list.get(7))
+                    ) || (skills.get(j).equals(list.get(4))) || (skills.get(j).equals(list.get(5))) || (skills.get(j).equals(list.get(0)))) {
+                        rank = rank + 1;
+
+                    } else {
+                        rank = rank + 0.5;
+                    }
+                }
+                break;
+
+
+            case "wizard":
+                for (int j = 0; j < p; j++) {
+                    if ((skills.get(j).equals(list.get(16))) || (skills.get(j).equals(list.get(6))) || (skills.get(j).equals(list.get(7))) || (skills.get(j).equals(list.get(13))) || (skills.get(j).equals(list.get(8))
+                    ) || (skills.get(j).equals(list.get(10)))) {
+                        rank = rank + 1;
+
+                    } else {
+                        rank = rank + 0.5;
+                    }
+                }
+
+                break;
+
+        }
+
+
+    }
+
+    public void prints() {
+        System.out.println("The selected skills are:" + skills);
+
+        System.out.println("The rank is :" + rank);
+        System.out.println("The stat Affinity of the character is :"+stat_Affinity);
+
+    }
+
+    private static int prof_bonus(int level) {
+        int prof_bonus;
+        if (level <= 4) {
+            prof_bonus=2;
+        }else if(level<=8){
+            prof_bonus = 3;
+
+        }else if(level<=12){
+            prof_bonus=4;
+        }
+        else if(level<=16){
+            prof_bonus=5;
+        }
+        else{
+            prof_bonus =6;
+        }
+        return prof_bonus;
+    }
+}
+
+
+
+
+

@@ -1,0 +1,18 @@
+Animal Handling
+Athletics
+Intimidation
+Nature
+Perception
+Survival
+History 
+Insight 
+Medicine
+Persuasion
+Religion
+Acrobatics
+Stealth
+Investigation
+Performance
+Sleight of Hand
+Arcana
+Deception
